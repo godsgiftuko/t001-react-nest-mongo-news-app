@@ -9,7 +9,7 @@ export default function DashboardPage() {
   const [news, setNews] = useState<News[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
   const [loading, setLoading] = useState(false);
-
+  
   const loadStats = async () => {
     try {
       setLoading(true);
