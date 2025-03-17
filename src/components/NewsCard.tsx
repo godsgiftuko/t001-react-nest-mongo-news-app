@@ -2,6 +2,7 @@ import React from "react";
 import { Heart, ThumbsDown, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { News } from "../types";
+import { Styles } from "../configs/styles";
 
 interface NewsCardProps {
   news: News;
@@ -13,7 +14,7 @@ export function NewsCard({ news, onLike, onDislike }: NewsCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
       {news.image_url && (
-        <Link to={`/news/${news.id}`}>
+        <Link to={`/news/${news._id}`}>
           <img
             src={news.image_url}
             alt={news.title}
@@ -25,15 +26,15 @@ export function NewsCard({ news, onLike, onDislike }: NewsCardProps) {
         <div className="flex flex-wrap gap-2 mb-6">
           {news.tags.map((tag) => (
             <button
-              key={tag}
+              key={tag.name}
               className="
                 flex items-center gap-1 px-3 py-1 rounded-full text-sm  bg-blue-500 text-white"
             >
-              {tag}
+              {tag.name}
             </button>
           ))}
         </div>
-        <Link to={`/news/${news.id}`} className="flex-1">
+        <Link to={`/news/${news._id}`} className="flex-1">
           <h2 className="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors">
             {news.title}
           </h2>
@@ -44,26 +45,26 @@ export function NewsCard({ news, onLike, onDislike }: NewsCardProps) {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                onLike(news.id);
+                onLike(news._id);
               }}
               className="flex items-center space-x-1 hover:text-red-500 transition-colors"
             >
-              <Heart size={18} />
+              <Heart size={Styles.Icons.size} />
               <span>{news.likes}</span>
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
-                onDislike(news.id);
+                onDislike(news._id);
               }}
               className="flex items-center space-x-1 hover:text-blue-500 transition-colors"
             >
-              <ThumbsDown size={18} />
+              <ThumbsDown size={Styles.Icons.size} />
               <span>{news.dislikes}</span>
             </button>
           </div>
           <div className="flex items-center space-x-1">
-            <Eye size={18} />
+            <Eye size={Styles.Icons.size} />
             <span>{news.views}</span>
           </div>
         </div>

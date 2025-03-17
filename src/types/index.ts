@@ -1,5 +1,5 @@
 export interface News {
-  id: string;
+  _id: string;
   title: string;
   content: string;
   image_url: string;
@@ -8,7 +8,7 @@ export interface News {
   likes: number;
   dislikes: number;
   author_id: string;
-  tags: string[];
+  tags: Tag[];
 }
 
 export interface Tag {
