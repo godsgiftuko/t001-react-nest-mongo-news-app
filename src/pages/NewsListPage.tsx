@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { News } from '../types';
-import { NewsCard } from './NewsCard';
+import { News, Tag } from '../types';
+import { NewsCard } from '../components/NewsCard';
 import { api } from '../lib/api';
 import { Filter, X } from 'lucide-react';
 
 const ITEMS_PER_PAGE = 4;
 
-export function NewsList() {
+export function NewsListPage() {
   const [news, setNews] = useState<News[]>([]);
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -52,7 +52,7 @@ export function NewsList() {
     try {
       const updatedNews = await api.incrementLikes(id);
       setNews(prev => prev.map(item => 
-        item.id === id ? { ...item, likes: updatedNews.likes } : item
+        item._id === id ? { ...item, likes: updatedNews.likes } : item
       ));
     } catch (error) {
       console.error('Error liking news:', error);
@@ -63,7 +63,7 @@ export function NewsList() {
     try {
       const updatedNews = await api.incrementDislikes(id);
       setNews(prev => prev.map(item => 
-        item.id === id ? { ...item, dislikes: updatedNews.dislikes } : item
+        item._id === id ? { ...item, dislikes: updatedNews.dislikes } : item
       ));
     } catch (error) {
       console.error('Error disliking news:', error);
@@ -74,7 +74,7 @@ export function NewsList() {
   
     const filteredNews = selectedTags.length === 0 
       ? news 
-      : news.filter(article => article.tags.some(tag => selectedTags.includes(tag)));
+      : news.filter(article => article.tags.some(tag => selectedTags.includes(tag.name)));
   
     const handleTagToggle = (tag: string) => {
       setSelectedTags(prev =>
@@ -94,18 +94,18 @@ export function NewsList() {
         <div className="flex flex-wrap gap-2 mb-6">
           {tags.map((tag) => (
             <button
-              key={tag}
-              onClick={() => handleTagToggle(tag)}
+              key={tag.name}
+              onClick={() => handleTagToggle(tag.name)}
               className={`
                 flex items-center gap-1 px-3 py-1 rounded-full text-sm
-                ${selectedTags.includes(tag)
+                ${selectedTags.includes(tag.name)
                   ? 'bg-blue-500 text-white hover:bg-blue-600'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }
               `}
             >
-              {tag}
-              {selectedTags.includes(tag) && (
+              {tag.name}
+              {selectedTags.includes(tag.name) && (
                 <X className="w-3 h-3 text-white" />
               )}
             </button>
@@ -123,7 +123,7 @@ export function NewsList() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredNews.map(article => (
           <NewsCard
-            key={article.id}
+            key={article._id}
             news={article}
             onLike={handleLike}
             onDislike={handleDislike}

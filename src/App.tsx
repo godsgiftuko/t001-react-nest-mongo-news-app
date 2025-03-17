@@ -1,23 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { NewsList } from './components/NewsList';
-import { NewsDetail } from './components/NewsDetail';
+import { NewsListPage } from './pages/NewsListPage';
+import { NewsDetailPage } from './pages/NewsDetailPage';
+import Header from './components/Header';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-100">
-        <nav className="bg-white shadow-md">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <h1 className="text-2xl font-bold text-gray-900">News App</h1>
-          </div>
-        </nav>
-        
+       <Header />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Routes>
-            <Route path="/" element={<NewsList />} />
-            <Route path="/news/:id" element={<NewsDetail />} />
+            <Route path="/" element={<NewsListPage />} />
+            <Route path="/news/:id" element={<NewsDetailPage />} />
+            <Route path="/admin/dashboard" element={<DashboardPage />} />
           </Routes>
         </main>
       </div>

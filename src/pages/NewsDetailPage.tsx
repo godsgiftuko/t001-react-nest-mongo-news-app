@@ -4,7 +4,7 @@ import { Heart, ThumbsDown, Eye, ArrowLeft } from 'lucide-react';
 import { api } from '../lib/api';
 import { News } from '../types';
 
-export function NewsDetail() {
+export function NewsDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [news, setNews] = React.useState<News | null>(null);
@@ -29,7 +29,7 @@ export function NewsDetail() {
   const handleLike = async () => {
     if (!news) return;
     try {
-      const updatedNews = await api.incrementLikes(news.id);
+      const updatedNews = await api.incrementLikes(news._id);
       setNews(updatedNews);
     } catch (error) {
       console.error('Error liking news:', error);
@@ -39,7 +39,7 @@ export function NewsDetail() {
   const handleDislike = async () => {
     if (!news) return;
     try {
-      const updatedNews = await api.incrementDislikes(news.id);
+      const updatedNews = await api.incrementDislikes(news._id);
       setNews(updatedNews);
     } catch (error) {
       console.error('Error disliking news:', error);
@@ -84,11 +84,11 @@ export function NewsDetail() {
       <div className="flex flex-wrap gap-2 mb-6">
           {news.tags.map((tag) => (
             <button
-              key={tag}
+              key={tag.name}
               className='
                 flex items-center gap-1 px-3 py-1 rounded-full text-sm  bg-blue-500 text-white'
             >
-              {tag}
+              {tag.name}
             </button>
           ))}
         </div>
