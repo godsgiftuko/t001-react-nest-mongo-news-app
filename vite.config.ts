@@ -7,12 +7,12 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
-  server: {
-  proxy: {
-    '/api': {
-      target: 'https://t001-news-app.vercel.app',
-      changeOrigin: true,
-    },
-  }}
+  // server: {
+  // proxy: {
+  //   '/api': {
+  //     target: 'https://t001-news-app.vercel.app',
+  //     changeOrigin: true,
+  //   },
+  // }}
 }
 );

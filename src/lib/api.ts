@@ -3,7 +3,7 @@ import { mockNews } from './mockData';
 import { Config } from '../configs';
 import { News } from '../types';
 
-// axios.defaults.baseURL = Config.API_URL;
+axios.defaults.baseURL = Config.API_URL;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 export const api = {
