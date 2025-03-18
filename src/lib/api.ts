@@ -44,5 +44,9 @@ export const api = {
   getNewsStats: async () => {
     const { data: news }: {  data: News[] } =  await axios.get('/api/news');
     return news;
+  },
+
+  deleteNews: async (id: string) => {
+    await axios.delete('/api/news/'+id);
   }
 };
