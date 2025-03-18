@@ -10,8 +10,9 @@ export default defineConfig({
   server: {
   proxy: {
     '/api': {
-      target: 'http://localhost:3000',
+      target: 'https://t001-news-app.vercel.app',
       changeOrigin: true,
     },
   }}
-});
+}
+);
