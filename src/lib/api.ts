@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { mockNews } from './mockData';
 import { Config } from '../configs';
-import { News } from '../types';
+import { News, Tag } from '../types';
 
 axios.defaults.baseURL = Config.API_URL;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -47,8 +47,8 @@ export const api = {
   },
 
   getAllTags: async () => {
-    const { data }: {  data: News[] } = await axios.get('/api/news');
-    return Array.from(new Set(data.flatMap(article => article.tags)));;
+    const { data: tags }: {  data: Tag[] } = await axios.get('/api/news/tags');
+    return tags;
   },
 
   getNewsStats: async () => {
