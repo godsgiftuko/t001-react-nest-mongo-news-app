@@ -18,7 +18,7 @@ export const api = {
   },
 
   getNews: async (start: number, end: number): Promise<News[]> => {
-      const { data }: {  data: News[] } = await axios.get('/api/news');
+      const { data }: {  data: News[] } = await axios.get('/api/news?order=DESC');
       const sortedNews = [...data].sort((a, b) => {
         const dateA = new Date(a.created_at).getTime();
         const dateB = new Date(b.created_at).getTime();
@@ -47,7 +47,7 @@ export const api = {
   },
 
   getAllTags: async () => {
-    const { data: tags }: {  data: Tag[] } = await axios.get('/api/news/tags');
+    const { data: tags }: {  data: Tag[] } = await axios.get('/api/news/tags?order=DESC');
     return tags;
   },
 
