@@ -29,7 +29,7 @@ export const api = {
   },
 
   getNewsById: async (id: string) => {
-    const { data: news }: {  data: News } = await axios.get('/api/news/' + id, { params: { countView: true }});
+    const { data: news }: {  data: News } = await axios.get('/api/news/id/' + id, { params: { countView: true }});
     if (!news) {
       throw new Error('News not found');
     }
@@ -57,6 +57,6 @@ export const api = {
   },
 
   deleteNews: async (id: string) => {
-    await axios.delete('/api/news/'+id);
+    await axios.delete('/api/news/id/'+id);
   }
 };
