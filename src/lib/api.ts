@@ -7,6 +7,16 @@ axios.defaults.baseURL = Config.API_URL;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 export const api = {
+  createNews: async ({ title, content, image_url, tagIds }: Pick<News, 'title' | 'image_url' | 'content'> & { tagIds: string[]; }): Promise<News> => {
+      const { data: news }: {  data: News } = await axios.post('/api/news', {
+        title,
+        image_url,
+        content,
+        tagIds,
+      });
+     return news;
+  },
+
   getNews: async (start: number, end: number): Promise<News[]> => {
       const { data }: {  data: News[] } = await axios.get('/api/news');
       const sortedNews = [...data].sort((a, b) => {

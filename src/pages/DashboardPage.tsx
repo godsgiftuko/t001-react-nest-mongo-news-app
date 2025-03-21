@@ -52,7 +52,7 @@ export default function DashboardPage() {
       <div className="font-bold text-xl py-2">Create News</div>
         <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col p-8 transition-transform hover:translate-y-1 ease-in">
           <div className="grid grid-cols-1 mt-5 text-gray-400 hover:text-blue-500">
-            <CreateNewsForm tags={tags} />
+            <CreateNewsForm tags={tags} loadStats={loadStats} />
           </div>
         </div>
       </div>
